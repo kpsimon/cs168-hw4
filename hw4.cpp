@@ -1,3 +1,4 @@
+
 #include <GL/glut.h>
 #include <iostream>
 #include <cmath>
@@ -9,15 +10,24 @@
 
 using namespace std;
 
-//calculates resulting color for transparency
-float result (float oldC, float newC) {
-    float result = (1-ALPHA)*oldC + ALPHA*newC;
-    return result;
+struct vector {
+  float x;
+  float y;
+  float z;
+} ;
+
+
+vector normalize_vector(vector vec){
+    vector normalized;
+    float sum = pow(vec.x, 2) + pow(vec.y, 2) + pow(vec.z, 2);
+    float divide = sqrt(sum);
+
+    normalized.x = float(vec.x / divide);
+    normalized.y = float(vec.y / divide);
+    normalized.z = float(vec.z / divide);
+
+    return normalized;
 }
-
-
-
-
 
 //draws polygons
 void redraw ( void ) {
@@ -55,3 +65,4 @@ int main(int argc, char *argv[]) {
     glutMainLoop();
     return 0;
 }
+
